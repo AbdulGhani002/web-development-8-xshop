@@ -1,7 +1,7 @@
-function getHomeRoute(req, res) {
+function getHome(req, res) {
   res.redirect("/login");
 }
 
 module.exports = {
-  getHomeRoute: getHomeRoute,
+  getHome: getHome,
 };

@@ -1,10 +1,25 @@
-<%- include('../../includes/head', {pageTitle : 'Login'}) %> 
+<%- include('../../shared/includes/head', {pageTitle : 'Login'}) %> 
 <link rel="stylesheet" href="/styles/auth.css">
 <link rel="stylesheet" href="/styles/forms.css">
   </head>
   <body>
-    <%- include('../../includes/header') %> 
+    <%- include('../../shared/includes/header') %> 
     <main>
-
+        <form action="/login" method="POST">
+          <input type="hidden" name="_csrf" value="<%= locals.csrfToken %> ">
+            <p>
+                <label for="email">E-Mail</label>
+                <input type="email" name="email" id="email" required>
+              </p>
+              <p>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" required minlength="8">
+              </p>
+            </p>
+            <button class="btn">Login</button>
+            <p>
+              <a href="/signup" id="switch-form">Signup Instead</a>
+            </p>
+        </form>
     </main>
-<%- include('../../includes/footer') %> 
+<%- include('../../shared/includes/footer') %> 
