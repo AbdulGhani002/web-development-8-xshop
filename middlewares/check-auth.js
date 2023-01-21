@@ -6,9 +6,7 @@ function checkAuthStatus(req, res, next) {
   }
 
   res.locals.uid = uid;
-
-  res.locals.isAuth = true;
-
+  res.locals.isAuth = true;  
   next();
 }
 

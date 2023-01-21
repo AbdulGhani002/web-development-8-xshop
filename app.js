@@ -1,20 +1,14 @@
-const express = require("express");
-
 const path = require("path");
+
+const express = require("express");
 
 const csrf = require("csurf");
 
 const expressSession = require("express-session");
 
-const app = express();
+const createSessionConfig = require("./config/session");
 
 const db = require("./data/database");
-
-const authRoutes = require("./routes/auth.routes");
-
-const baseRoutes = require("./routes/base.routes");
-
-const productsRoutes = require("./routes/products.routes");
 
 const addCsrfTokenMiddleware = require("./middlewares/csrf-token");
 
@@ -22,11 +16,17 @@ const errorHandlerMiddleware = require("./middlewares/error-handler");
 
 const checkAuthStatusMiddleware = require("./middlewares/check-auth");
 
-const createSessionConfig = require("./config/session");
+const authRoutes = require("./routes/auth.routes");
+
+const productsRoutes = require("./routes/products.routes");
+
+const baseRoutes = require("./routes/base.routes");
+
+const app = express();
 
 app.set("view engine", "ejs");
 
-app.set("views", path.join("views"));
+app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
 
@@ -51,10 +51,13 @@ app.use(productsRoutes);
 app.use(errorHandlerMiddleware);
 
 db.connectToDatabase()
+
   .then(function () {
     app.listen(3000);
   })
+
   .catch(function (error) {
-    console.log("An Error Occured While connecting to the database.");
+    console.log("Failed to connect to the database!");
+
     console.log(error);
   });

@@ -1,13 +1,15 @@
-const mongodbStore = require("connect-mongodb-session");
-
 const expressSession = require("express-session");
 
-function createSessionStore() {
-  const MongodbStore = mongodbStore(expressSession);
+const mongoDbStore = require("connect-mongodb-session");
 
-  const store = new MongodbStore({
+function createSessionStore() {
+  const MongoDBStore = mongoDbStore(expressSession);
+
+  const store = new MongoDBStore({
     uri: "mongodb://127.0.0.1:27017",
+
     databaseName: "online-shop",
+
     collection: "sessions",
   });
 
@@ -16,12 +18,16 @@ function createSessionStore() {
 
 function createSessionConfig() {
   return {
-    secret: "my-secret",
+    secret: "super-secret",
+
     resave: false,
+
     saveUninitialized: false,
+
     store: createSessionStore(),
+
     cookie: {
-      maxAge: 7 * 24 * 3600 * 1000,
+      maxAge: 2 * 24 * 60 * 60 * 1000,
     },
   };
 }
