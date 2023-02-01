@@ -1,20 +1,20 @@
 function isEmpty(value) {
-  return !value || value.trim() === "";
+  return !value || value.trim() === '';
 }
 
 function userCredentialsAreValid(email, password) {
   return (
-    email && email.includes("@") && password && password.trim().length >= 8
+    email && email.includes('@') && password && password.trim().length >= 6
   );
 }
 
 function userDetailsAreValid(email, password, name, street, postal, city) {
   return (
     userCredentialsAreValid(email, password) &&
-    isEmpty(name) &&
-    isEmpty(street) &&
-    isEmpty(postal) &&
-    isEmpty(city)
+    !isEmpty(name) &&
+    !isEmpty(street) &&
+    !isEmpty(postal) &&
+    !isEmpty(city)
   );
 }
 

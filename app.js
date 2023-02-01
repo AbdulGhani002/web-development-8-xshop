@@ -16,6 +16,8 @@ const errorHandlerMiddleware = require("./middlewares/error-handler");
 
 const checkAuthStatusMiddleware = require("./middlewares/check-auth");
 
+const protectRoutesMiddleware = require("./middlewares/protect-routes");
+
 const authRoutes = require("./routes/auth.routes");
 
 const productsRoutes = require("./routes/products.routes");
@@ -32,7 +34,7 @@ app.set("views", path.join(__dirname, "views"));
 
 app.use(express.static("public"));
 
-app.use('/products/assets',express.static('product-data'))
+app.use("/products/assets", express.static("product-data"));
 
 app.use(express.urlencoded({ extended: false }));
 
@@ -51,6 +53,8 @@ app.use(baseRoutes);
 app.use(authRoutes);
 
 app.use(productsRoutes);
+
+app.use(protectRoutesMiddleware);
 
 app.use("/admin", adminRoutes);
 
